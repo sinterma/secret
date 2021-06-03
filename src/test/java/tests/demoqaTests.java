@@ -1,9 +1,10 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -31,22 +32,32 @@ public class demoqaTests {
         $(" .react-datepicker__year-select").selectOption("1991");
         $("[aria-label='Choose Thursday, January 3rd, 1991']").click();
 
+        //subjects
+        $("[id=subjectsInput]").setValue("ph").pressEnter();
+
         //hobbies
         $("[for='hobbies-checkbox-3']").click();
 
         //Address
         $("[placeholder='Current Address']").setValue("New York");
 
+        //State and City
+        $("[id=react-select-3-input]").setValue("n").pressEnter();
+        $("[id=react-select-4-input]").setValue("Del").pressEnter();
+
         $("[id=submit]").click();
 
         //check
-
         $(".table-responsive").shouldHave( text("Lady"),
                 text("Gaga"),
                 text("sinterma@gmail.com"),
                 text("9315418786"),
                 text("03 January,1991"),
-                text("New York"));
-                    }
+                text("Physics"),
+                text("New York"),
+                text("NCR"),
+                text("Delhi"));
+
+    }
 
 }
