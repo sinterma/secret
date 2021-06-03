@@ -4,13 +4,12 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class demoqaTests {
+public class DemoqaTests {
 
     @BeforeAll
     static void setup() {
@@ -18,9 +17,10 @@ public class demoqaTests {
     }
 
     @Test
-    void succesfulSubmitFormTest() {
+    void successfulSubmitFormTest() {
+        String firstName = "Lady";
         open("https://demoqa.com/automation-practice-form");
-        $("[id=firstName]").setValue("Lady");
+        $("[id=firstName]").setValue(firstName);
         $("[id=lastName]").setValue("Gaga");
         $("[id=userEmail]").setValue("sinterma@gmail.com");
         $("[for='gender-radio-2']").click();
@@ -38,17 +38,20 @@ public class demoqaTests {
         //hobbies
         $("[for='hobbies-checkbox-3']").click();
 
+        $("#uploadPicture").uploadFromClasspath("new.png");
+
         //Address
         $("[placeholder='Current Address']").setValue("New York");
 
         //State and City
-        $("[id=react-select-3-input]").setValue("n").pressEnter();
-        $("[id=react-select-4-input]").setValue("Del").pressEnter();
+        $("[id=react-select-3-input]").setValue("n");
+        $(byText("NCR")).click();
+        $("[id=react-select-4-input]").setValue("Delhi").pressEnter();
 
         $("[id=submit]").click();
 
         //check
-        $(".table-responsive").shouldHave( text("Lady"),
+        $(".table-responsive").shouldHave(text(firstName),
                 text("Gaga"),
                 text("sinterma@gmail.com"),
                 text("9315418786"),
